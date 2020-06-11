@@ -7,25 +7,21 @@
 
 # 2. 지원 환경(Supported devices)
 
-|제목|내용|설명|
+|Use case|Android version number|Android API level|
 |------|---|---|
-|테스트1|테스트2|테스트3|
-|테스트1|테스트2|테스트3|
-|테스트1|테스트2|테스트3|
+|Audio playback|4.1|16|
+|Video playback|4.1|16|
+|DASH (no DRM)|4.1|16|
+|DASH (Widevine CENC; “cenc” scheme)|4.4|19|
+|DASH (Widevine CENC; “cbcs”, “cbc1” and “cens” schemes)|7.1|25|
+|DASH (ClearKey)|5.0|21|
+|SmoothStreaming (no DRM)|4.1|16|
+|SmoothStreaming (PlayReady SL2000)|AndroidTV|AndroidTV|
+|HLS (no DRM)|4.1|16|
+|HLS (AES-128 encryption)|4.1|16|
+|HLS (Widevine CENC; “cenc” scheme)|4.4|19|
+|HLS (Widevine CENC; “cbcs” scheme)|7.1|25|
 
-Use case	Android version number	Android API level
-Audio playback	4.1	16
-Video playback	4.1	16
-DASH (no DRM)	4.1	16
-DASH (Widevine CENC; “cenc” scheme)	4.4	19
-DASH (Widevine CENC; “cbcs”, “cbc1” and “cens” schemes)	7.1	25
-DASH (ClearKey)	5.0	21
-SmoothStreaming (no DRM)	4.1	16
-SmoothStreaming (PlayReady SL2000)	AndroidTV	AndroidTV
-HLS (no DRM)	4.1	16
-HLS (AES-128 encryption)	4.1	16
-HLS (Widevine CENC; “cenc” scheme)	4.4	19
-HLS (Widevine CENC; “cbcs” scheme)	7.1	25
 For a given use case, we aim to support ExoPlayer on all Android devices that satisfy the minimum version requirement. Known device specific compatibility issues are listed below. Device specific issues on our GitHub issue tracker can be found here.
 
 FireOS (version 4 and earlier) - Whilst we endeavour to support FireOS devices, FireOS is a fork of Android and as a result we are unable to guarantee support. Device specific issues encountered on FireOS are normally caused by incompatibilities in the support that FireOS provides for running Android applications. Such issues should be reported to Amazon in the first instance. We are aware of issues affecting FireOS version 4 and earlier. We believe FireOS version 5 resolved these issues.
