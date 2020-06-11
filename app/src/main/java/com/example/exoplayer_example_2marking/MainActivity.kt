@@ -20,7 +20,7 @@ import com.google.android.exoplayer2.util.Util
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Player.EventListener{
 //    private val exoPlayerView: PlayerView? = null
     private var player: SimpleExoPlayer? = null
 
@@ -43,44 +43,44 @@ class MainActivity : AppCompatActivity() {
         releasePlayer()
     }
 
-    fun initializePlayer(){
-        if (player == null){
-            player = newSimpleInstance(
-                this.applicationContext
-            )
+    private fun setPlayerEventListener(){
+        player!!.addListener(object : Player.EventListener {
+            fun onTimelineChanged(
+                timeline: Timeline?,
+                manifest: Any?
+            ) {
+                Log.e("onTimelineChanged","call")
+            }
 
-//            player!!.addListener(object : Player.EventListener {
-//                fun onTimelineChanged(
-//                    timeline: Timeline?,
-//                    manifest: Any?
-//                ) {
-//                    Log.e("onTimelineChanged","call")
-//                }
-//
-//                override fun onTracksChanged(
-//                    trackGroups: TrackGroupArray,
-//                    trackSelections: TrackSelectionArray
-//                ) {
-//                    Log.e("onTracksChanged","call")
-//                }
-//
-//                override fun onLoadingChanged(isLoading: Boolean) {
-//                    Log.e("onLoadingChanged","call")
-//                }
-//                override fun onPlayerStateChanged(
-//                    playWhenReady: Boolean,
-//                    playbackState: Int
-//                ) {
-//                    Log.e("onPlayerStateChanged","call")
-//                }
-//
-//                override fun onPlayerError(error: ExoPlaybackException) {
-//                    //Catch here, but app still crash on some errors!
-//                    Log.e("onPlayerError","call")
-//                }
-//
-//                fun onPositionDiscontinuity() {}
-//            })
+            override fun onTracksChanged(
+                trackGroups: TrackGroupArray,
+                trackSelections: TrackSelectionArray
+            ) {
+                Log.e("onTracksChanged","call")
+            }
+
+            override fun onLoadingChanged(isLoading: Boolean) {
+                Log.e("onLoadingChanged","call")
+            }
+            override fun onPlayerStateChanged(
+                playWhenReady: Boolean,
+                playbackState: Int
+            ) {
+                Log.e("onPlayerStateChanged","call")
+            }
+
+            override fun onPlayerError(error: ExoPlaybackException) {
+                //Catch here, but app still crash on some errors!
+                Log.e("onPlayerError","call")
+            }
+
+            fun onPositionDiscontinuity() {}
+        })
+    }
+    private fun initializePlayer(){
+        if (player == null){
+            player = SimpleExoPlayer.Builder(this).build()
+            setPlayerEventListener()
             testExoPlayerView?.player = player
         }
 
@@ -92,7 +92,6 @@ class MainActivity : AppCompatActivity() {
 
 
         player?.prepare(mediaSource, true, false)
-
         player?.playWhenReady = playWhenReady
     }
 
