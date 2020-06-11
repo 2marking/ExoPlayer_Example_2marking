@@ -22,6 +22,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    // ExoPlayer는 자바8을 사용하기 때문에 이를 사용할 수 있게 해주는 라이브러리 추가
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 
 }
 
@@ -34,4 +39,20 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //core, ui 관련 Dependency 추가
+    def exoplayer_version = '2.11.5'
+    implementation "com.google.android.exoplayer:exoplayer-core:$exoplayer_version"
+    implementation "com.google.android.exoplayer:exoplayer-ui:$exoplayer_version"
+
+    //ex. m3u8 파일 사용을 위한 HLS(Http Live Streaming) 라이브러리 추가
+    implementation "com.google.android.exoplayer:exoplayer-hls:$exoplayer_version"
+
+    /*
+        exoplayer-core : Core fuctionality(required).
+        exoplayer-dash : Support for DASH content.
+        exoplayer-hls : Support for HLS content.
+        exoplayer-smoothstreaming : Support for SmoothStreaming content.
+        exoplayer-ui : UI components and resources for use with ExoPlayer.
+     */
 }
