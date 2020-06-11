@@ -22,8 +22,16 @@
 |HLS (Widevine CENC; “cenc” scheme)|4.4|19|
 |HLS (Widevine CENC; “cbcs” scheme)|7.1|25|
 
-For a given use case, we aim to support ExoPlayer on all Android devices that satisfy the minimum version requirement. Known device specific compatibility issues are listed below. Device specific issues on our GitHub issue tracker can be found here.
+특정 사용 사례의 경우, 최소 버전 요구 사항을 충족하는 모든 Android 기기에서 ExoPlayer를 지원한다. 레퍼런스에서 제공하는 Android 버전별 호환성 표는 위와 같다.
 
-FireOS (version 4 and earlier) - Whilst we endeavour to support FireOS devices, FireOS is a fork of Android and as a result we are unable to guarantee support. Device specific issues encountered on FireOS are normally caused by incompatibilities in the support that FireOS provides for running Android applications. Such issues should be reported to Amazon in the first instance. We are aware of issues affecting FireOS version 4 and earlier. We believe FireOS version 5 resolved these issues.
-Nexus Player (only when using an HDMI to DVI cable) - There is a known issue affecting Nexus Player, only when the device is connected to a monitor using a certain type of HDMI to DVI cable, which causes video being played too quickly. Use of an HDMI to DVI cable is not realistic for an end user setup because such cables cannot carry audio. Hence this issue can be safely ignored. We suggest using a realistic end user setup (e.g., the device connected to a TV using a standard HDMI cable) for development and testing.
-Emulators - Some Android emulators do not properly implement components of Android’s media stack, and as a result do not support ExoPlayer. This is an issue with the emulator, not with ExoPlayer. Android’s official emulator (“Virtual Devices” in Android Studio) supports ExoPlayer provided the system image has an API level of at least 23. System images with earlier API levels do not support ExoPlayer. The level of support provided by third party emulators varies. Issues running ExoPlayer on third party emulators should be reported to the developer of the emulator rather than to the ExoPlayer team. Where possible, we recommend testing media applications on physical devices rather than emulators.
+FireOS (버전 4 이하)
+- FireOS 장치를 지원하기 위해 노력하는 동안 FireOS는 Android의 포크이므로 지원을 보장할 수 없다. FireOS에서 발생하는 기기별 문제는 일반적으로 FireOS가 Android 애플리케이션을 실행하기 위해 제공하는 지원의 비호환성으로 인해 발생한다. 이러한 문제는 Amazon에 오류 보고 및 수정을 진행해야 한다. 최근에는 FireOS 5가 이러한 문제를 해결했다.
+
+Nexus Player (HDMI to DVI 케이블을 사용하는 경우에만 해당)
+- Nexus Player에 영향을 미치는 알려진 문제가 있다. 특정 유형의 HDMI-DVI 케이블을 사용하여 기기를 모니터에 연결 한 경우에만 비디오가 너무 빨리 재생된다. 최종 사용자 설정에는 오디오를 전송할 수 없기 때문에 HDMI-DVI 케이블을 사용하는 것이 좋지 않다. 따라서 이 문제는 무시해도 된다. 개발 및 테스트를 위해 현실적인 최종 사용자 설정(예 : 표준 HDMI 케이블을 사용하여 TV에 연결된 장치)을 사용하는 것이 좋다.
+
+Emulator
+- 일부 Android 에뮬레이터는 Android 미디어 스택의 구성 요소를 올바르게 구현하지 않으므로 결과적으로 ExoPlayer를 지원하지 않는다. 이것은 ExoPlayer가 아닌 에뮬레이터의 문제로 시스템 이미지의 API 수준이 23 이상인 경우 Android의 공식 에뮬레이터(Android Studio의 "가상 장치")는 ExoPlayer를 지원한다. 이전 API 수준의 시스템 이미지는 ExoPlayer를 지원하지 않는다. 타사 에뮬레이터가 제공하는 지원 수준은 다양하며 타사 에뮬레이터에서 ExoPlayer를 실행하는 문제는 ExoPlayer팀이 아닌 에뮬레이터 개발자에게 오류보고 및 수정을 요청해야 한다. 그래서 가능하다면 에뮬레이터가 아닌 실제 디바이스에서 테스팅을 진행하는 것이 좋다.
+
+출처 : ExoPlayer 레퍼런스 문서 https://exoplayer.dev/supported-devices.html
+
