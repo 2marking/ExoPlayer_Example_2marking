@@ -40,3 +40,7 @@ Emulator
 최신 버전 : 2.11.5 (2020-06-05)
 
 확인 링크 : https://github.com/google/ExoPlayer/blob/release-v2/RELEASENOTES.md
+
+# 4. 참고 자료
+
+Java Doc : https://exoplayer.dev/doc/reference/
