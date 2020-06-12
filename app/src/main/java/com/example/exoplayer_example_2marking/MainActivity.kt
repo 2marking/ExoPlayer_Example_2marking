@@ -4,7 +4,6 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.exoplayer2.ExoPlaybackException
-import com.google.android.exoplayer2.ExoPlayerFactory.newSimpleInstance
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.Timeline
@@ -23,10 +22,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), Player.EventListener{
 //    private val exoPlayerView: PlayerView? = null
     private var player: SimpleExoPlayer? = null
-
-    var playWhenReady:Boolean = true
-    var currentWindow:Int = 0
-    var playbackPosition:Long = 0L
+    private var playWhenReady:Boolean = true
+    private var currentWindow:Int = 0
+    private var playbackPosition:Long = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
