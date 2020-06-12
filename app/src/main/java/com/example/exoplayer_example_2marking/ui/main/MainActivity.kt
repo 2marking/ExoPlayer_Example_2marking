@@ -1,17 +1,14 @@
-package com.example.exoplayer_example_2marking
+package com.example.exoplayer_example_2marking.ui.main
 
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.exoplayer2.ExoPlaybackException
+import com.example.exoplayer_example_2marking.R
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.Timeline
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.source.TrackGroupArray
 import com.google.android.exoplayer2.source.hls.HlsMediaSource
-import com.google.android.exoplayer2.trackselection.TrackSelectionArray
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.exoplayer2.util.Log
@@ -28,6 +25,7 @@ class MainActivity : AppCompatActivity(), Player.EventListener{
     private var currentWindow:Int = 0
     private var playbackPosition:Long = 0L
     private val videoDataSize:Int = 2
+    private val sampleURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,13 +77,13 @@ class MainActivity : AppCompatActivity(), Player.EventListener{
 //        })
     }
     private fun initializePlayer(){
+
         if (player1 == null){
             player1 = SimpleExoPlayer.Builder(this).build()
             setPlayerEventListener()
             testExoPlayerView1?.player = player1
         }
 
-        val sampleURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 
         val mediaSource:MediaSource = this!!.buildMediaSource(Uri.parse(sampleURL))!!
 
@@ -96,6 +94,7 @@ class MainActivity : AppCompatActivity(), Player.EventListener{
             player2 = SimpleExoPlayer.Builder(this).build()
             testExoPlayerView2?.player = player2
         }
+
         val mediaSource2:MediaSource = this!!.buildMediaSource(Uri.parse(sampleURL))!!
         player2?.prepare(mediaSource2, true, false)
         player2?.playWhenReady = playWhenReady
@@ -131,11 +130,11 @@ class MainActivity : AppCompatActivity(), Player.EventListener{
             it.release()
             player1 = null
         }
+
         player2?.let{
             playbackPosition = it.currentPosition
             currentWindow = it.currentWindowIndex
             playWhenReady = it.playWhenReady
-
             testExoPlayerView2?.player = null
 
             it.release()
