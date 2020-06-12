@@ -21,10 +21,13 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), Player.EventListener{
 //    private val exoPlayerView: PlayerView? = null
-    private var player: SimpleExoPlayer? = null
+    private var player1: SimpleExoPlayer? = null
+    private var player2: SimpleExoPlayer? = null
+
     private var playWhenReady:Boolean = true
     private var currentWindow:Int = 0
     private var playbackPosition:Long = 0L
+    private val videoDataSize:Int = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,55 +45,60 @@ class MainActivity : AppCompatActivity(), Player.EventListener{
     }
 
     private fun setPlayerEventListener(){
-        player!!.addListener(object : Player.EventListener {
-            fun onTimelineChanged(
-                timeline: Timeline?,
-                manifest: Any?
-            ) {
-                Log.e("onTimelineChanged","call")
-            }
-
-            override fun onTracksChanged(
-                trackGroups: TrackGroupArray,
-                trackSelections: TrackSelectionArray
-            ) {
-                Log.e("onTracksChanged","call")
-            }
-
-            override fun onLoadingChanged(isLoading: Boolean) {
-                Log.e("onLoadingChanged","call")
-            }
-            override fun onPlayerStateChanged(
-                playWhenReady: Boolean,
-                playbackState: Int
-            ) {
-                Log.e("onPlayerStateChanged","call")
-            }
-
-            override fun onPlayerError(error: ExoPlaybackException) {
-                //Catch here, but app still crash on some errors!
-                Log.e("onPlayerError","call")
-            }
-
-            fun onPositionDiscontinuity() {}
-        })
+//        player1!!.addListener(object : Player.EventListener {
+//            fun onTimelineChanged(
+//                timeline: Timeline?,
+//                manifest: Any?
+//            ) {
+//                Log.e("onTimelineChanged","call")
+//            }
+//
+//            override fun onTracksChanged(
+//                trackGroups: TrackGroupArray,
+//                trackSelections: TrackSelectionArray
+//            ) {
+//                Log.e("onTracksChanged","call")
+//            }
+//
+//            override fun onLoadingChanged(isLoading: Boolean) {
+//                Log.e("onLoadingChanged","call")
+//            }
+//            override fun onPlayerStateChanged(
+//                playWhenReady: Boolean,
+//                playbackState: Int
+//            ) {
+//                Log.e("onPlayerStateChanged","call")
+//            }
+//
+//            override fun onPlayerError(error: ExoPlaybackException) {
+//                //Catch here, but app still crash on some errors!
+//                Log.e("onPlayerError","call")
+//            }
+//
+//            fun onPositionDiscontinuity() {}
+//        })
     }
     private fun initializePlayer(){
-        if (player == null){
-            player = SimpleExoPlayer.Builder(this).build()
+        if (player1 == null){
+            player1 = SimpleExoPlayer.Builder(this).build()
             setPlayerEventListener()
-            testExoPlayerView?.player = player
+            testExoPlayerView1?.player = player1
         }
 
         val sampleURL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 
         val mediaSource:MediaSource = this!!.buildMediaSource(Uri.parse(sampleURL))!!
-        Log.e("mediaSource",mediaSource.toString())
-        Log.e("mediaSource",Uri.parse(sampleURL).toString())
 
+        player1?.prepare(mediaSource, true, false)
+        player1?.playWhenReady = playWhenReady
 
-        player?.prepare(mediaSource, true, false)
-        player?.playWhenReady = playWhenReady
+        if (player2 == null){
+            player2 = SimpleExoPlayer.Builder(this).build()
+            testExoPlayerView2?.player = player2
+        }
+        val mediaSource2:MediaSource = this!!.buildMediaSource(Uri.parse(sampleURL))!!
+        player2?.prepare(mediaSource2, true, false)
+        player2?.playWhenReady = playWhenReady
     }
 
     private fun buildMediaSource(uri: Uri): MediaSource? {
@@ -114,14 +122,24 @@ class MainActivity : AppCompatActivity(), Player.EventListener{
     }
 
     private fun releasePlayer() {
-        player?.let{
+        player1?.let{
+            playbackPosition = it.currentPosition
+            currentWindow = it.currentWindowIndex
+            playWhenReady = it.playWhenReady
+            testExoPlayerView1?.player = null
+
+            it.release()
+            player1 = null
+        }
+        player2?.let{
             playbackPosition = it.currentPosition
             currentWindow = it.currentWindowIndex
             playWhenReady = it.playWhenReady
 
-            testExoPlayerView?.player = null
+            testExoPlayerView2?.player = null
+
             it.release()
-            player = null
+            player2 = null
         }
     }
 }
