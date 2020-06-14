@@ -21,9 +21,5 @@
             android:id="@+id/testExoPlayerView2"
             android:layout_height="300dp"
             android:layout_width="300dp"/>
-        <com.google.android.exoplayer2.ui.PlayerView
-            android:id="@+id/testExoPlayerView3"
-            android:layout_height="300dp"
-            android:layout_width="300dp"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
