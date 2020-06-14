@@ -7,12 +7,14 @@ import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseViewModel : ViewModel() {
     protected val compositeDisposable = CompositeDisposable()
+/*
 
     protected val _dataLoading = MutableLiveData<Event<Boolean>>
     val dataLoading: LiveData<Event<Boolean>> = _dataLoading
 
     protected val _error = MutableLiveData<Event<Throwable>>()
     val error: LiveData<Event<Throwable>> = _error
+*/
 
     open fun initialized(){
 

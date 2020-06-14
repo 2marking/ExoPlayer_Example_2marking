@@ -6,13 +6,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 
 class ErrorActivity : AppCompatActivity() {
-    private lateinit var viewBinding: ErrorViewBinding
+//    private lateinit var viewBinding: ErrorViewBinding
 
     private val lastActivityIntent by lazy { intent.getParcelableExtra<Intent>(EXTRA_INTENT)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_error)
+//        viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_error)
     }
 
     companion object {

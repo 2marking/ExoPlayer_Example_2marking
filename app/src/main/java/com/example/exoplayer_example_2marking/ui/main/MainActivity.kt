@@ -4,11 +4,15 @@ import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.exoplayer_example_2marking.R
+import com.google.android.exoplayer2.ExoPlaybackException
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.Timeline
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.source.TrackGroupArray
 import com.google.android.exoplayer2.source.hls.HlsMediaSource
+import com.google.android.exoplayer2.trackselection.TrackSelectionArray
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.exoplayer2.util.Log
@@ -43,41 +47,40 @@ class MainActivity : AppCompatActivity(), Player.EventListener{
     }
 
     private fun setPlayerEventListener(){
-//        player1!!.addListener(object : Player.EventListener {
-//            fun onTimelineChanged(
-//                timeline: Timeline?,
-//                manifest: Any?
-//            ) {
-//                Log.e("onTimelineChanged","call")
-//            }
-//
-//            override fun onTracksChanged(
-//                trackGroups: TrackGroupArray,
-//                trackSelections: TrackSelectionArray
-//            ) {
-//                Log.e("onTracksChanged","call")
-//            }
-//
-//            override fun onLoadingChanged(isLoading: Boolean) {
-//                Log.e("onLoadingChanged","call")
-//            }
-//            override fun onPlayerStateChanged(
-//                playWhenReady: Boolean,
-//                playbackState: Int
-//            ) {
-//                Log.e("onPlayerStateChanged","call")
-//            }
-//
-//            override fun onPlayerError(error: ExoPlaybackException) {
-//                //Catch here, but app still crash on some errors!
-//                Log.e("onPlayerError","call")
-//            }
-//
-//            fun onPositionDiscontinuity() {}
-//        })
+        player1!!.addListener(object : Player.EventListener {
+            fun onTimelineChanged(
+                timeline: Timeline?,
+                manifest: Any?
+            ) {
+                Log.e("onTimelineChanged","call")
+            }
+
+            override fun onTracksChanged(
+                trackGroups: TrackGroupArray,
+                trackSelections: TrackSelectionArray
+            ) {
+                Log.e("onTracksChanged","call")
+            }
+
+            override fun onLoadingChanged(isLoading: Boolean) {
+                Log.e("onLoadingChanged","call")
+            }
+            override fun onPlayerStateChanged(
+                playWhenReady: Boolean,
+                playbackState: Int
+            ) {
+                Log.e("onPlayerStateChanged","call")
+            }
+
+            override fun onPlayerError(error: ExoPlaybackException) {
+                //Catch here, but app still crash on some errors!
+                Log.e("onPlayerError","call")
+            }
+
+            fun onPositionDiscontinuity() {}
+        })
     }
     private fun initializePlayer(){
-
         if (player1 == null){
             player1 = SimpleExoPlayer.Builder(this).build()
             setPlayerEventListener()
@@ -103,18 +106,14 @@ class MainActivity : AppCompatActivity(), Player.EventListener{
     private fun buildMediaSource(uri: Uri): MediaSource? {
         val userAgent = Util.getUserAgent(this, "blackJin")
         return if (uri.lastPathSegment!!.contains("mp3") || uri.lastPathSegment!!.contains("mp4")) {
-            Log.e("if case","first")
             ProgressiveMediaSource.Factory(DefaultHttpDataSourceFactory(userAgent))
                 .createMediaSource(uri)
         } else if (uri.lastPathSegment!!.contains("m3u8")) {
             //com.google.android.exoplayer:exoplayer-hls 확장 라이브러리를 빌드 해야 합니다.
-            Log.e("if case","second")
 
             HlsMediaSource.Factory(DefaultHttpDataSourceFactory(userAgent))
                 .createMediaSource(uri)
         } else {
-            Log.e("if case","else")
-
             ProgressiveMediaSource.Factory(DefaultDataSourceFactory(this, userAgent))
                 .createMediaSource(uri)
         }
@@ -125,6 +124,7 @@ class MainActivity : AppCompatActivity(), Player.EventListener{
             playbackPosition = it.currentPosition
             currentWindow = it.currentWindowIndex
             playWhenReady = it.playWhenReady
+
             testExoPlayerView1?.player = null
 
             it.release()
@@ -135,6 +135,7 @@ class MainActivity : AppCompatActivity(), Player.EventListener{
             playbackPosition = it.currentPosition
             currentWindow = it.currentWindowIndex
             playWhenReady = it.playWhenReady
+
             testExoPlayerView2?.player = null
 
             it.release()
