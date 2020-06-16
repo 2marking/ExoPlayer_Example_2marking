@@ -44,3 +44,5 @@ Emulator
 # 4. 참고 자료
 
 Java Doc : https://exoplayer.dev/doc/reference/
+
+# 5. ExoPlayer_Example_2marking 샘플 앱 실행 
