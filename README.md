@@ -37,7 +37,7 @@ Emulator
 
 # 3. 최신 버전 체크(Release Notes)
 
-최신 버전 : 2.12.0 (2020-09-11)
+최신 버전 : 2.12.1 (2020-10-23)
 
 확인 링크 : https://github.com/google/ExoPlayer/blob/release-v2/RELEASENOTES.md
 
